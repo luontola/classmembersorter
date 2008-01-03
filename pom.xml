@@ -49,7 +49,7 @@
             <groupId>com.intellij</groupId>
             <artifactId>annotations</artifactId>
             <version>7.0.2</version>
-            <!--<scope>provided</scope>-->
+            <scope>provided</scope>
         </dependency>
 
         <!-- JDave -->
