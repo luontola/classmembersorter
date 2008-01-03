@@ -1,8 +1,12 @@
 package net.orfjackal.tools.templateproject;
 
+/**
+ * @author Esko Luontola
+ * @since 4.1.2008
+ */
 public class App {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    public boolean ok() {
+        return true;
     }
 }
