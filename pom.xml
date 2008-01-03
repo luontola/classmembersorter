@@ -11,7 +11,7 @@
     <name>Class Member Sorter</name>
     <description>Sorts Method and Class objects according to the actual line numbers</description>
     <url>http://www.orfjackal.net</url>
-    <inceptionYear>2007</inceptionYear>
+    <inceptionYear>2008</inceptionYear>
 
     <developers>
         <developer>
@@ -92,11 +92,6 @@
                     <descriptors>
                         <descriptor>src/main/assembly/src.xml</descriptor>
                     </descriptors>
-                    <archive>
-                        <manifest>
-                            <mainClass>net.orfjackal.tools.classmembersorter.App</mainClass>
-                        </manifest>
-                    </archive>
                 </configuration>
                 <executions>
                     <execution>
