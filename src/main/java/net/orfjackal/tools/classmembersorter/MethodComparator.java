@@ -14,22 +14,21 @@ import java.util.Comparator;
  */
 public class MethodComparator implements Comparator<java.lang.reflect.Method> {
 
-    private Repository repository;
+    private JavaClass clazz;
 
-    public MethodComparator() {
-        repository = new ClassLoaderRepository(MethodComparator.class.getClassLoader());
-    }
-
-    public int compare(java.lang.reflect.Method o1, java.lang.reflect.Method o2) {
+    public MethodComparator(java.lang.Class<?> declaringClass) {
         try {
-            JavaClass javaClass = repository.loadClass(o1.getDeclaringClass());
-            int line1 = firstLineNumber(o1, javaClass);
-            int line2 = firstLineNumber(o2, javaClass);
-            return line1 - line2;
-
+            Repository repository = new ClassLoaderRepository(declaringClass.getClassLoader());
+            clazz = repository.loadClass(declaringClass);
         } catch (ClassNotFoundException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    public int compare(java.lang.reflect.Method o1, java.lang.reflect.Method o2) {
+        int line1 = firstLineNumber(o1, clazz);
+        int line2 = firstLineNumber(o2, clazz);
+        return line1 - line2;
     }
 
     private static int firstLineNumber(java.lang.reflect.Method method, JavaClass javaClass) {

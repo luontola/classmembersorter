@@ -35,7 +35,7 @@ public class MethodComparatorSpec extends Specification<MethodComparator> {
         private MethodComparator comparator;
 
         public MethodComparator create() {
-            comparator = new MethodComparator();
+            comparator = new MethodComparator(Foo.class);
             return comparator;
         }
 
@@ -53,7 +53,7 @@ public class MethodComparatorSpec extends Specification<MethodComparator> {
         private MethodComparator comparator;
 
         public MethodComparator create() {
-            comparator = new MethodComparator();
+            comparator = new MethodComparator(Foo.class);
             return comparator;
         }
 
