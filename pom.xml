@@ -43,6 +43,21 @@
 
     <dependencies>
 
+        <!-- BCEL 5.2 would be newer, but Maven repository does not contain its sources,
+             so development against it would suck -->
+        <dependency>
+            <groupId>bcel</groupId>
+            <artifactId>bcel</artifactId>
+            <version>5.1</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.apache.bcel</groupId>
+            <artifactId>bcel</artifactId>
+            <version>5.2</version>
+        </dependency>
+        -->
+
         <!-- IntelliJ IDEA -->
 
         <dependency>

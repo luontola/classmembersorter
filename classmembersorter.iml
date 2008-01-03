@@ -17,6 +17,19 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library name="bcel:bcel:5.1">
+        <CLASSES>
+          <root url="jar://C:/Documents and Settings/ORFJackal/.m2/repository/bcel/bcel/5.1/bcel-5.1.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://C:/Documents and Settings/ORFJackal/.m2/repository/bcel/bcel/5.1/bcel-5.1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://C:/Documents and Settings/ORFJackal/.m2/repository/bcel/bcel/5.1/bcel-5.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
     <orderEntry type="module-library">
       <library name="cglib:cglib-nodep:2.1_3">
         <CLASSES>
