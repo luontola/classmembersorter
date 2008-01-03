@@ -4,7 +4,6 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.LineNumberTable;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.util.ClassLoaderRepository;
-import org.apache.bcel.util.Repository;
 
 import java.util.Comparator;
 
@@ -17,8 +16,8 @@ public class MethodComparator implements Comparator<java.lang.reflect.Method> {
     private JavaClass clazz;
 
     public MethodComparator(java.lang.Class<?> declaringClass) {
+        ClassLoaderRepository repository = new ClassLoaderRepository(declaringClass.getClassLoader());
         try {
-            Repository repository = new ClassLoaderRepository(declaringClass.getClassLoader());
             clazz = repository.loadClass(declaringClass);
         } catch (ClassNotFoundException e) {
             throw new IllegalArgumentException(e);
