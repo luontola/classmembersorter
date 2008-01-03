@@ -1,25 +1,26 @@
-package net.orfjackal.tools.classmembersorter;
-
-import com.sun.org.apache.bcel.internal.Repository;
-import com.sun.org.apache.bcel.internal.classfile.JavaClass;
-import com.sun.org.apache.bcel.internal.classfile.LineNumberTable;
-import com.sun.org.apache.bcel.internal.classfile.Method;
-import com.sun.org.apache.bcel.internal.util.ClassLoaderRepository;
+import org.apache.bcel.classfile.ClassParser;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.LineNumberTable;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.util.ClassLoaderRepository;
 
 import java.io.IOException;
 import java.util.Arrays;
 
 public class ReadLineNumbersFromClassFile {
 
-    public static void main(String[] args) throws IOException {
+    private static final boolean READ_PHYSICAL_FILE = false;
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         JavaClass javaClass;
 
-        // ClassParser parser = new ClassParser("D:\\DOCUMENTS\\PROGRAMS\\OMAT\\weenyconsole\\target\\test-classes\\Test.class");
-        // javaClass = parser.parse();
-
-        Repository.setRepository(new ClassLoaderRepository(ReadLineNumbersFromClassFile.class.getClassLoader()));
-        javaClass = Repository.lookupClass(ReadLineNumbersFromClassFile.class.getName());
-
+        if (READ_PHYSICAL_FILE) {
+            ClassParser parser = new ClassParser("target/classes/ReadLineNumbersFromClassFile.class");
+            javaClass = parser.parse();
+        } else {
+            ClassLoaderRepository repository = new ClassLoaderRepository(ReadLineNumbersFromClassFile.class.getClassLoader());
+            javaClass = repository.loadClass(ReadLineNumbersFromClassFile.class.getName());
+        }
         System.out.println("javaClass = " + javaClass);
 
         for (Method method : javaClass.getMethods()) {
