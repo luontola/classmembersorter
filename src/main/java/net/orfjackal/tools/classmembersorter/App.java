@@ -1,4 +1,4 @@
-package net.orfjackal.tools.templateproject;
+package net.orfjackal.tools.classmembersorter;
 
 /**
  * @author Esko Luontola

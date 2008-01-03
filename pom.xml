@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.orfjackal.tools</groupId>
-    <artifactId>template-project</artifactId>
+    <artifactId>classmembersorter</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Template Project</name>
-    <description>Base project structure for a new project</description>
+    <name>Class Member Sorter</name>
+    <description>Sorts Method and Class objects according to the actual line numbers</description>
     <url>http://www.orfjackal.net</url>
-    <inceptionYear>200x</inceptionYear>
+    <inceptionYear>2007</inceptionYear>
 
     <developers>
         <developer>
@@ -21,8 +21,8 @@
     </developers>
 
     <scm>
-        <connection>scm:svn:svn://tux/orfjackal/tools/template-project/trunk</connection>
-        <developerConnection>scm:svn:svn://tux/orfjackal/tools/template-project/trunk</developerConnection>
+        <connection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/trunk</connection>
+        <developerConnection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/trunk</developerConnection>
     </scm>
 
     <repositories>
@@ -94,7 +94,7 @@
                     </descriptors>
                     <archive>
                         <manifest>
-                            <mainClass>net.orfjackal.tools.templateproject.App</mainClass>
+                            <mainClass>net.orfjackal.tools.classmembersorter.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

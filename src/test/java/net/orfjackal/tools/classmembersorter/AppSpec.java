@@ -1,4 +1,4 @@
-package net.orfjackal.tools.templateproject;
+package net.orfjackal.tools.classmembersorter;
 
 import jdave.Specification;
 import jdave.junit4.JDaveRunner;
