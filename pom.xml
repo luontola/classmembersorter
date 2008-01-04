@@ -13,6 +13,13 @@
     <url>http://www.orfjackal.net</url>
     <inceptionYear>2008</inceptionYear>
 
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses</url>
+        </license>
+    </licenses>
+
     <developers>
         <developer>
             <id>orfjackal</id>
