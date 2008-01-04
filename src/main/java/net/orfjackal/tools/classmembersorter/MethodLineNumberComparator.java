@@ -1,18 +1,19 @@
 package net.orfjackal.tools.classmembersorter;
 
 import org.apache.bcel.classfile.JavaClass;
-import org.apache.bcel.classfile.LineNumberTable;
-import org.apache.bcel.classfile.Method;
 import org.apache.bcel.util.ClassLoaderRepository;
 import org.apache.bcel.util.Repository;
 
+import java.lang.reflect.Method;
 import java.util.Comparator;
 
 /**
+ * Sorts methods according to the order in which they have been declared in the source code.
+ *
  * @author Esko Luontola
  * @since 4.1.2008
  */
-public class MethodLineNumberComparator implements Comparator<java.lang.reflect.Method> {
+public class MethodLineNumberComparator implements Comparator<Method> {
 
     private Repository repository;
 
@@ -20,7 +21,7 @@ public class MethodLineNumberComparator implements Comparator<java.lang.reflect.
         repository = new ClassLoaderRepository(getClass().getClassLoader());
     }
 
-    public int compare(java.lang.reflect.Method o1, java.lang.reflect.Method o2) {
+    public int compare(Method o1, Method o2) {
         if (sameClass(o1, o2)) {
             int line1 = firstLineNumber(o1);
             int line2 = firstLineNumber(o2);
@@ -34,27 +35,28 @@ public class MethodLineNumberComparator implements Comparator<java.lang.reflect.
         }
     }
 
-    private int firstLineNumber(java.lang.reflect.Method method) {
+    private int firstLineNumber(Method method) {
+        return BcelUtils.firstLineNumber(toBcel(method), 0);
+    }
+
+    private org.apache.bcel.classfile.Method toBcel(Method method) {
         try {
             JavaClass javaClass = repository.loadClass(method.getDeclaringClass());
-            Method methodInfo = javaClass.getMethod(method);
-            LineNumberTable table = methodInfo.getLineNumberTable();
-            return (table != null) ? table.getSourceLine(0) : 0;
-
+            return javaClass.getMethod(method);
         } catch (ClassNotFoundException e) {
             throw new IllegalArgumentException("Unable to load class of method: " + method, e);
         }
     }
 
-    private static boolean sameClass(java.lang.reflect.Method o1, java.lang.reflect.Method o2) {
+    private static boolean sameClass(Method o1, Method o2) {
         return o1.getDeclaringClass().equals(o2.getDeclaringClass());
     }
 
-    private static boolean parentClass(java.lang.reflect.Method parent, java.lang.reflect.Method child) {
+    private static boolean parentClass(Method parent, Method child) {
         return parent.getDeclaringClass().isAssignableFrom(child.getDeclaringClass());
     }
 
-    private static int alphabeticalOrder(java.lang.reflect.Method o1, java.lang.reflect.Method o2) {
+    private static int alphabeticalOrder(Method o1, Method o2) {
         return o1.getDeclaringClass().getName().compareTo(o2.getDeclaringClass().getName());
     }
 }
