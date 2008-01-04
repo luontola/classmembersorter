@@ -10,15 +10,17 @@ public class TestData {
 
     public static final Class<?> CLASS_ONE = FirstClass.class;
     public static final Class<?> CLASS_TWO = SecondClass.class;
-    public static final Class<?> CLASS_THREE = MethodClass.class;
-    public static final Class<?> CLASS_FOUR = SuperParentMethodClass.class;
-    public static final Class<?> CLASS_FIVE = ParentMethodClass.class;
+    public static final Class<?> CLASS_THREE = ChildClass.class;
+    public static final Class<?> CLASS_FOUR = SuperParentClass.class;
+    public static final Class<?> CLASS_FIVE = ParentClass.class;
 
-    public static final Class<?> CLASS_CHILD = MethodClass.class;
-    public static final Method METHOD_ONE = getMethod(CLASS_THREE, "methodOne");
-    public static final Method METHOD_TWO = getMethod(CLASS_THREE, "methodTwo");
-    public static final Method METHOD_PARENT = getMethod(CLASS_THREE, "methodParent");
-    public static final Method METHOD_SUPER_PARENT = getMethod(CLASS_THREE, "methodSuperParent");
+    public static final Class<?> CLASS_CHILD = ChildClass.class;
+    public static final Class<?> CLASS_UNRELATED = ChildClass.UnrelatedClass.class;
+    public static final Method METHOD_ONE = getMethod(CLASS_CHILD, "methodOne");
+    public static final Method METHOD_TWO = getMethod(CLASS_CHILD, "methodTwo");
+    public static final Method METHOD_PARENT = getMethod(ParentClass.class, "methodParent");
+    public static final Method METHOD_SUPER_PARENT = getMethod(SuperParentClass.class, "methodSuperParent");
+    public static final Method METHOD_UNRELATED = getMethod(CLASS_UNRELATED, "unrelated");
 
     public class FirstClass {
     }
@@ -26,32 +28,32 @@ public class TestData {
     public class SecondClass {
     }
 
-    public class MethodClass extends ParentMethodClass {
-
+    public class ChildClass extends ParentClass {
         public void methodOne() {
         }
 
         public void methodTwo() {
         }
-    }
 
-    public class SuperParentMethodClass {
-
-        public void methodSuperParent() {
-
+        public class UnrelatedClass {
+            public void unrelated() {
+            }
         }
     }
 
-    public class ParentMethodClass extends SuperParentMethodClass {
+    public class SuperParentClass {
+        public void methodSuperParent() {
+        }
+    }
 
+    public class ParentClass extends SuperParentClass {
         public void methodParent() {
-
         }
     }
 
     private static Method getMethod(Class<?> clazz, String method) {
         try {
-            return clazz.getMethod(method);
+            return clazz.getDeclaredMethod(method);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             return null;

@@ -11,9 +11,9 @@ import org.junit.runner.RunWith;
 @RunWith(JDaveRunner.class)
 public class ClassLineNumberComparatorSpec extends Specification<ClassLineNumberComparator> {
 
-    public class WhenTwoInnerClassesAreCompared {
+    private ClassLineNumberComparator comparator;
 
-        private ClassLineNumberComparator comparator;
+    public class WhenTwoInnerClassesAreCompared {
 
         public ClassLineNumberComparator create() {
             comparator = new ClassLineNumberComparator();
@@ -30,8 +30,6 @@ public class ClassLineNumberComparatorSpec extends Specification<ClassLineNumber
     }
 
     public class WhenAnInnerClassIsComparedWithItself {
-
-        private ClassLineNumberComparator comparator;
 
         public ClassLineNumberComparator create() {
             comparator = new ClassLineNumberComparator();

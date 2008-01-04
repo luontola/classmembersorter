@@ -2,8 +2,7 @@ package net.orfjackal.tools.classmembersorter;
 
 import jdave.Specification;
 import jdave.junit4.JDaveRunner;
-import static net.orfjackal.tools.classmembersorter.TestData.METHOD_ONE;
-import static net.orfjackal.tools.classmembersorter.TestData.METHOD_TWO;
+import static net.orfjackal.tools.classmembersorter.TestData.*;
 import org.junit.runner.RunWith;
 
 /**
@@ -13,9 +12,9 @@ import org.junit.runner.RunWith;
 @RunWith(JDaveRunner.class)
 public class MethodLineNumberComparatorSpec extends Specification<MethodLineNumberComparator> {
 
-    public class WhenTwoMethodsAreCompared {
+    private MethodLineNumberComparator comparator;
 
-        private MethodLineNumberComparator comparator;
+    public class WhenTwoMethodsAreCompared {
 
         public MethodLineNumberComparator create() {
             comparator = new MethodLineNumberComparator();
@@ -33,8 +32,6 @@ public class MethodLineNumberComparatorSpec extends Specification<MethodLineNumb
 
     public class WhenAMethodIsComparedWithItself {
 
-        private MethodLineNumberComparator comparator;
-
         public MethodLineNumberComparator create() {
             comparator = new MethodLineNumberComparator();
             return comparator;
@@ -42,6 +39,37 @@ public class MethodLineNumberComparatorSpec extends Specification<MethodLineNumb
 
         public void itShouldBeEqualToItself() {
             specify(comparator.compare(METHOD_ONE, METHOD_ONE) == 0);
+        }
+    }
+
+    public class WhenTheOtherMethodIsInAParentClass {
+
+        public MethodLineNumberComparator create() {
+            comparator = new MethodLineNumberComparator();
+            return comparator;
+        }
+
+        public void theMethodInChildClassShouldBeLesser() {
+            specify(comparator.compare(METHOD_ONE, METHOD_PARENT) < 0);
+            specify(comparator.compare(METHOD_ONE, METHOD_SUPER_PARENT) < 0);
+        }
+
+        public void theMethodInParentClassShouldBeGreater() {
+            specify(comparator.compare(METHOD_PARENT, METHOD_ONE) > 0);
+            specify(comparator.compare(METHOD_SUPER_PARENT, METHOD_ONE) > 0);
+        }
+    }
+
+    public class WhenMethodsAreInUnrelatedClasses {
+
+        public MethodLineNumberComparator create() {
+            comparator = new MethodLineNumberComparator();
+            return comparator;
+        }
+
+        public void theClassesShouldBeInAlphabeticalOrder() {
+            int alphabeticalOrder = CLASS_UNRELATED.getName().compareTo(CLASS_CHILD.getName());
+            specify(comparator.compare(METHOD_UNRELATED, METHOD_ONE), should.equal(alphabeticalOrder));
         }
     }
 }
