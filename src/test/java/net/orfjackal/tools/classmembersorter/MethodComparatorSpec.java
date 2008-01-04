@@ -2,7 +2,8 @@ package net.orfjackal.tools.classmembersorter;
 
 import jdave.Specification;
 import jdave.junit4.JDaveRunner;
-import static net.orfjackal.tools.classmembersorter.TestData.*;
+import static net.orfjackal.tools.classmembersorter.TestData.METHOD_ONE;
+import static net.orfjackal.tools.classmembersorter.TestData.METHOD_TWO;
 import org.junit.runner.RunWith;
 
 /**
@@ -17,7 +18,7 @@ public class MethodComparatorSpec extends Specification<MethodComparator> {
         private MethodComparator comparator;
 
         public MethodComparator create() {
-            comparator = new MethodComparator(CLASS_CHILD);
+            comparator = new MethodComparator();
             return comparator;
         }
 
@@ -35,7 +36,7 @@ public class MethodComparatorSpec extends Specification<MethodComparator> {
         private MethodComparator comparator;
 
         public MethodComparator create() {
-            comparator = new MethodComparator(CLASS_CHILD);
+            comparator = new MethodComparator();
             return comparator;
         }
 

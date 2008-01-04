@@ -15,8 +15,8 @@ public class InnerClassComparator implements Comparator<java.lang.Class<?>> {
 
     private Repository repository;
 
-    public InnerClassComparator(java.lang.Class<?> declaringClass) {
-        repository = new ClassLoaderRepository(declaringClass.getClassLoader());
+    public InnerClassComparator() {
+        repository = new ClassLoaderRepository(getClass().getClassLoader());
     }
 
     public int compare(java.lang.Class<?> o1, java.lang.Class<?> o2) {

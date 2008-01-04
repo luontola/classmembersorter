@@ -11,19 +11,19 @@ public class ClassMemberSorter {
 
     public static Class<?>[] getDeclaredClasses(Class<?> declaringClass) {
         Class<?>[] classes = declaringClass.getDeclaredClasses();
-        Arrays.sort(classes, new InnerClassComparator(declaringClass));
+        Arrays.sort(classes, new InnerClassComparator());
         return classes;
     }
 
     public static Method[] getDeclaredMethods(Class<?> declaringClass) {
         Method[] methods = declaringClass.getDeclaredMethods();
-        Arrays.sort(methods, new MethodComparator(declaringClass));
+        Arrays.sort(methods, new MethodComparator());
         return methods;
     }
 
     public static Method[] getMethods(Class<?> clazz) {
-        Method[] methods = clazz.getDeclaredMethods();
-        Arrays.sort(methods, new MethodComparator(clazz));
+        Method[] methods = clazz.getMethods();
+        Arrays.sort(methods, new MethodComparator());
         return methods;
     }
 }
