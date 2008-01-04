@@ -19,6 +19,8 @@ package net.orfjackal.tools.classmembersorter;
 
 import jdave.Specification;
 import jdave.junit4.JDaveRunner;
+import static net.orfjackal.tools.classmembersorter.TestData.CLASS_ONE;
+import static net.orfjackal.tools.classmembersorter.TestData.CLASS_TWO;
 import org.junit.runner.RunWith;
 
 /**
@@ -38,11 +40,11 @@ public class ClassLineNumberComparatorSpec extends Specification<ClassLineNumber
         }
 
         public void theFirstOneShouldBeLesser() {
-            specify(comparator.compare(TestData.CLASS_ONE, TestData.CLASS_TWO) < 0);
+            specify(comparator.compare(CLASS_ONE, CLASS_TWO) < 0);
         }
 
         public void theSecondOneShouldBeGreater() {
-            specify(comparator.compare(TestData.CLASS_TWO, TestData.CLASS_ONE) > 0);
+            specify(comparator.compare(CLASS_TWO, CLASS_ONE) > 0);
         }
     }
 
@@ -54,7 +56,7 @@ public class ClassLineNumberComparatorSpec extends Specification<ClassLineNumber
         }
 
         public void itShouldBeEqualToItself() {
-            specify(comparator.compare(TestData.CLASS_ONE, TestData.CLASS_ONE) == 0);
+            specify(comparator.compare(CLASS_ONE, CLASS_ONE) == 0);
         }
     }
 }
