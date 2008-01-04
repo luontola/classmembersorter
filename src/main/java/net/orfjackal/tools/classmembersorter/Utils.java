@@ -8,9 +8,9 @@ import org.apache.bcel.classfile.Method;
  * @author Esko Luontola
  * @since 4.1.2008
  */
-public final class BcelUtils {
+public final class Utils {
 
-    private BcelUtils() {
+    private Utils() {
     }
 
     public static int firstLineNumber(Method method, int defaultValue) {

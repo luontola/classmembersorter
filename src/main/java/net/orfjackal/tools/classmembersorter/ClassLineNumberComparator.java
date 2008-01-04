@@ -24,8 +24,8 @@ public class ClassLineNumberComparator implements Comparator<Class<?>> {
         try {
             JavaClass c1 = repository.loadClass(o1);
             JavaClass c2 = repository.loadClass(o2);
-            int line1 = BcelUtils.firstLineNumber(c1, 0);
-            int line2 = BcelUtils.firstLineNumber(c2, 0);
+            int line1 = Utils.firstLineNumber(c1, 0);
+            int line2 = Utils.firstLineNumber(c2, 0);
             return line1 - line2;
 
         } catch (ClassNotFoundException e) {

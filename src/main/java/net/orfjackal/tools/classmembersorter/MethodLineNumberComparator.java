@@ -36,7 +36,7 @@ public class MethodLineNumberComparator implements Comparator<Method> {
     }
 
     private int firstLineNumber(Method method) {
-        return BcelUtils.firstLineNumber(toBcel(method), 0);
+        return Utils.firstLineNumber(toBcel(method), 0);
     }
 
     private org.apache.bcel.classfile.Method toBcel(Method method) {
