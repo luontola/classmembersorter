@@ -43,8 +43,9 @@
 
     <dependencies>
 
-        <!-- BCEL 5.2 would be newer, but Maven repository does not contain its sources,
-             so development against it would suck -->
+        <!-- BCEL 5.2 is newer, but Maven repository does not contain its sources,
+            so development against it is not nice. Also 5.2 has a dependency to
+            jakarta-regexp:jakarta-regexp:1.4 but by using 5.1 we can avoid it. -->
         <dependency>
             <groupId>bcel</groupId>
             <artifactId>bcel</artifactId>
@@ -57,17 +58,6 @@
             <version>5.2</version>
         </dependency>
         -->
-
-        <!-- IntelliJ IDEA -->
-
-        <dependency>
-            <groupId>com.intellij</groupId>
-            <artifactId>annotations</artifactId>
-            <version>7.0.2</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- JDave -->
 
         <dependency>
             <groupId>org.jdave</groupId>
