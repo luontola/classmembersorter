@@ -15,7 +15,7 @@ public class ReadLineNumbersFromClassFile {
         JavaClass javaClass;
 
         if (READ_PHYSICAL_FILE) {
-            ClassParser parser = new ClassParser("target/classes/ReadLineNumbersFromClassFile.class");
+            ClassParser parser = new ClassParser("target/test-classes/ReadLineNumbersFromClassFile.class");
             javaClass = parser.parse();
         } else {
             ClassLoaderRepository repository = new ClassLoaderRepository(ReadLineNumbersFromClassFile.class.getClassLoader());
