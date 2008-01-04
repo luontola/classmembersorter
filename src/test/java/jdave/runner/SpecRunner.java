@@ -16,6 +16,7 @@
 package jdave.runner;
 
 import jdave.Specification;
+import net.orfjackal.tools.classmembersorter.ClassMemberSorter;
 
 import java.lang.reflect.Method;
 
@@ -25,7 +26,7 @@ import java.lang.reflect.Method;
  */
 public class SpecRunner {
     public <T extends Specification<?>> void visit(Class<T> specType, ISpecVisitor callback) {
-        for (Class<?> contextType : getDeclaredClasses(specType)) {
+        for (Class<?> contextType : ClassMemberSorter.getDeclaredClasses(specType)) {
             Context context = new Context(specType, contextType) {
                 @Override
                 protected Behavior newBehavior(Method method, Class<? extends Specification<?>> specType, Class<?> contextType) {
@@ -37,7 +38,7 @@ public class SpecRunner {
     }
 
     public <T extends Specification<?>> void run(Class<T> specType, ISpecVisitor callback) {
-        for (Class<?> contextType : getDeclaredClasses(specType)) {
+        for (Class<?> contextType : ClassMemberSorter.getDeclaredClasses(specType)) {
             Context context = new Context(specType, contextType) {
                 @Override
                 protected Behavior newBehavior(Method method, Class<? extends Specification<?>> specType, Class<?> contextType) {
@@ -46,19 +47,6 @@ public class SpecRunner {
             };
             run(callback, context);
         }
-    }
-
-    private Class<?>[] getDeclaredClasses(Class<?> specType) {
-        return reverse(specType.getDeclaredClasses());
-    }
-
-    private static Class<?>[] reverse(Class<?>[] classes) {
-        for (int i = 0; i < classes.length / 2; i++) {
-            Class<?> tmp = classes[i];
-            classes[i] = classes[(classes.length - 1) - i];
-            classes[(classes.length - 1) - i] = tmp;
-        }
-        return classes;
     }
 
     private void run(ISpecVisitor callback, Context context) {

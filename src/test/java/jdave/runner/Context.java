@@ -16,6 +16,7 @@
 package jdave.runner;
 
 import jdave.Specification;
+import net.orfjackal.tools.classmembersorter.ClassMemberSorter;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public abstract class Context {
     protected abstract Behavior newBehavior(Method method, Class<? extends Specification<?>> specType, Class<?> contextType);
 
     void run(ISpecVisitor callback) {
-        for (Method method : contextType.getMethods()) {
+        for (Method method : ClassMemberSorter.getMethods(contextType)) {
             if (isBehavior(method)) {
                 callback.onBehavior(newBehavior(method, specType, contextType));
             }
