@@ -21,23 +21,17 @@ public class MethodLineNumberComparator implements Comparator<java.lang.reflect.
     }
 
     public int compare(java.lang.reflect.Method o1, java.lang.reflect.Method o2) {
-        if (inSameClass(o1, o2)) {
+        if (sameClass(o1, o2)) {
             int line1 = firstLineNumber(o1);
             int line2 = firstLineNumber(o2);
             return line1 - line2;
+        } else if (parentClass(o1, o2)) {
+            return 1;
+        } else if (parentClass(o2, o1)) {
+            return -1;
         } else {
-            if (o1.getDeclaringClass().isAssignableFrom(o2.getDeclaringClass())) {
-                return 1;
-            } else if (o2.getDeclaringClass().isAssignableFrom(o1.getDeclaringClass())) {
-                return -1;
-            } else {
-                return o1.getDeclaringClass().getName().compareTo(o2.getDeclaringClass().getName());
-            }
+            return alphabeticalOrder(o1, o2);
         }
-    }
-
-    private static boolean inSameClass(java.lang.reflect.Method o1, java.lang.reflect.Method o2) {
-        return o1.getDeclaringClass().equals(o2.getDeclaringClass());
     }
 
     private int firstLineNumber(java.lang.reflect.Method method) {
@@ -50,5 +44,17 @@ public class MethodLineNumberComparator implements Comparator<java.lang.reflect.
         } catch (ClassNotFoundException e) {
             throw new IllegalArgumentException("Unable to load class of method: " + method, e);
         }
+    }
+
+    private static boolean sameClass(java.lang.reflect.Method o1, java.lang.reflect.Method o2) {
+        return o1.getDeclaringClass().equals(o2.getDeclaringClass());
+    }
+
+    private static boolean parentClass(java.lang.reflect.Method parent, java.lang.reflect.Method child) {
+        return parent.getDeclaringClass().isAssignableFrom(child.getDeclaringClass());
+    }
+
+    private static int alphabeticalOrder(java.lang.reflect.Method o1, java.lang.reflect.Method o2) {
+        return o1.getDeclaringClass().getName().compareTo(o2.getDeclaringClass().getName());
     }
 }
