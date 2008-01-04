@@ -32,14 +32,17 @@ public class TestData {
     public static final Class<?> CLASS_FIVE = ParentClass.class;
 
     public static final Class<?> CLASS_CHILD = ChildClass.class;
-    public static final Class<?> CLASS_UNRELATED = ChildClass.UnrelatedClass.class;
     public static final Method METHOD_ONE = getMethod(CLASS_CHILD, "methodOne");
     public static final Method METHOD_TWO = getMethod(CLASS_CHILD, "methodTwo");
     public static final Method METHOD_PARENT = getMethod(ParentClass.class, "methodParent");
     public static final Method METHOD_SUPER_PARENT = getMethod(SuperParentClass.class, "methodSuperParent");
+
+    public static final Class<?> CLASS_UNRELATED = FirstClass.class;
     public static final Method METHOD_UNRELATED = getMethod(CLASS_UNRELATED, "unrelated");
 
     public class FirstClass {
+        public void unrelated() {
+        }
     }
 
     public class SecondClass {
@@ -50,11 +53,6 @@ public class TestData {
         }
 
         public void methodTwo() {
-        }
-
-        public class UnrelatedClass {
-            public void unrelated() {
-            }
         }
     }
 
