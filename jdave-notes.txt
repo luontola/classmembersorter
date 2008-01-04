@@ -1,0 +1,4 @@
+
+Use ClassMemberSorter in:
+jdave.runner.SpecRunner#run
+jdave.runner.Context#run
