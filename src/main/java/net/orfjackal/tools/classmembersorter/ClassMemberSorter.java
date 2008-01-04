@@ -21,23 +21,40 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
+ * Provides lists of class members (methods and inner classes) in the same order
+ * as they have been declared in the source code. Requires that the classes have
+ * been compiled with debug information (line numbers) included in the bytecode
+ * and that the methods have a body (not native nor abstract).
+ *
  * @author Esko Luontola
  * @since 4.1.2008
  */
-public class ClassMemberSorter {
+public final class ClassMemberSorter {
 
+    private ClassMemberSorter() {
+    }
+
+    /**
+     * @return the same as {@link Class#getDeclaredClasses()} but in the same order as declared in the source code.
+     */
     public static Class<?>[] getDeclaredClasses(Class<?> declaringClass) {
         Class<?>[] classes = declaringClass.getDeclaredClasses();
         Arrays.sort(classes, new ClassLineNumberComparator());
         return classes;
     }
 
+    /**
+     * @return the same as {@link Class#getDeclaredMethods()} but in the same order as declared in the source code.
+     */
     public static Method[] getDeclaredMethods(Class<?> declaringClass) {
         Method[] methods = declaringClass.getDeclaredMethods();
         Arrays.sort(methods, new MethodLineNumberComparator());
         return methods;
     }
 
+    /**
+     * @return the same as {@link Class#getMethods()} but in the same order as declared in the source code.
+     */
     public static Method[] getMethods(Class<?> clazz) {
         Method[] methods = clazz.getMethods();
         Arrays.sort(methods, new MethodLineNumberComparator());
