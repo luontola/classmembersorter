@@ -11,15 +11,6 @@ import org.junit.runner.RunWith;
 @RunWith(JDaveRunner.class)
 public class InnerClassComparatorSpec extends Specification<InnerClassComparator> {
 
-    private Class<?> classOne = FirstClass.class;
-    private Class<?> classTwo = SecondClass.class;
-
-    private static class FirstClass {
-    }
-
-    private static class SecondClass {
-    }
-
     public class WhenTwoInnerClassesAreCompared {
 
         private InnerClassComparator comparator;
@@ -30,11 +21,11 @@ public class InnerClassComparatorSpec extends Specification<InnerClassComparator
         }
 
         public void theFirstOneShouldBeLesser() {
-            specify(comparator.compare(classOne, classTwo) < 0);
+            specify(comparator.compare(TestData.CLASS_ONE, TestData.CLASS_TWO) < 0);
         }
 
         public void theSecondOneShouldBeGreater() {
-            specify(comparator.compare(classTwo, classOne) > 0);
+            specify(comparator.compare(TestData.CLASS_TWO, TestData.CLASS_ONE) > 0);
         }
     }
 
@@ -48,7 +39,7 @@ public class InnerClassComparatorSpec extends Specification<InnerClassComparator
         }
 
         public void itShouldBeEqualToItself() {
-            specify(comparator.compare(classOne, classOne) == 0);
+            specify(comparator.compare(TestData.CLASS_ONE, TestData.CLASS_ONE) == 0);
         }
     }
 }

@@ -4,8 +4,6 @@ import jdave.Specification;
 import jdave.junit4.JDaveRunner;
 import org.junit.runner.RunWith;
 
-import java.lang.reflect.Method;
-
 /**
  * @author Esko Luontola
  * @since 4.1.2008
@@ -13,38 +11,21 @@ import java.lang.reflect.Method;
 @RunWith(JDaveRunner.class)
 public class MethodComparatorSpec extends Specification<MethodComparator> {
 
-    private Method methodOne;
-    private Method methodTwo;
-
-    private static class Foo {
-
-        public void methodOne() {
-        }
-
-        public void methodTwo() {
-        }
-    }
-
-    public MethodComparatorSpec() throws NoSuchMethodException {
-        methodOne = Foo.class.getMethod("methodOne");
-        methodTwo = Foo.class.getMethod("methodTwo");
-    }
-
     public class WhenTwoMethodsAreCompared {
 
         private MethodComparator comparator;
 
         public MethodComparator create() {
-            comparator = new MethodComparator(Foo.class);
+            comparator = new MethodComparator(TestData.METHOD_CLASS);
             return comparator;
         }
 
         public void theFirstOneShouldBeLesser() {
-            specify(comparator.compare(methodOne, methodTwo) < 0);
+            specify(comparator.compare(TestData.METHOD_ONE, TestData.METHOD_TWO) < 0);
         }
 
         public void theSecondOneShouldBeGreater() {
-            specify(comparator.compare(methodTwo, methodOne) > 0);
+            specify(comparator.compare(TestData.METHOD_TWO, TestData.METHOD_ONE) > 0);
         }
     }
 
@@ -53,12 +34,12 @@ public class MethodComparatorSpec extends Specification<MethodComparator> {
         private MethodComparator comparator;
 
         public MethodComparator create() {
-            comparator = new MethodComparator(Foo.class);
+            comparator = new MethodComparator(TestData.METHOD_CLASS);
             return comparator;
         }
 
         public void itShouldBeEqualToItself() {
-            specify(comparator.compare(methodOne, methodOne) == 0);
+            specify(comparator.compare(TestData.METHOD_ONE, TestData.METHOD_ONE) == 0);
         }
     }
 }
