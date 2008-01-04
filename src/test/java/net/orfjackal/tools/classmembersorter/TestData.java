@@ -10,22 +10,42 @@ public class TestData {
 
     public static final Class<?> CLASS_ONE = FirstClass.class;
     public static final Class<?> CLASS_TWO = SecondClass.class;
-    public static final Class<?> METHOD_CLASS = MethodClass.class;
-    public static final Method METHOD_ONE = getMethod(METHOD_CLASS, "methodOne");
-    public static final Method METHOD_TWO = getMethod(METHOD_CLASS, "methodTwo");
+    public static final Class<?> CLASS_THREE = MethodClass.class;
+    public static final Class<?> CLASS_FOUR = SuperParentMethodClass.class;
+    public static final Class<?> CLASS_FIVE = ParentMethodClass.class;
 
-    public static class FirstClass {
+    public static final Class<?> CLASS_CHILD = MethodClass.class;
+    public static final Method METHOD_ONE = getMethod(CLASS_THREE, "methodOne");
+    public static final Method METHOD_TWO = getMethod(CLASS_THREE, "methodTwo");
+    public static final Method METHOD_PARENT = getMethod(CLASS_THREE, "methodParent");
+    public static final Method METHOD_SUPER_PARENT = getMethod(CLASS_THREE, "methodSuperParent");
+
+    public class FirstClass {
     }
 
-    public static class SecondClass {
+    public class SecondClass {
     }
 
-    public static class MethodClass {
+    public class MethodClass extends ParentMethodClass {
 
         public void methodOne() {
         }
 
         public void methodTwo() {
+        }
+    }
+
+    public class SuperParentMethodClass {
+
+        public void methodSuperParent() {
+
+        }
+    }
+
+    public class ParentMethodClass extends SuperParentMethodClass {
+
+        public void methodParent() {
+
         }
     }
 

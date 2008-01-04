@@ -2,6 +2,7 @@ package net.orfjackal.tools.classmembersorter;
 
 import jdave.Specification;
 import jdave.junit4.JDaveRunner;
+import static net.orfjackal.tools.classmembersorter.TestData.*;
 import org.junit.runner.RunWith;
 
 /**
@@ -16,16 +17,16 @@ public class MethodComparatorSpec extends Specification<MethodComparator> {
         private MethodComparator comparator;
 
         public MethodComparator create() {
-            comparator = new MethodComparator(TestData.METHOD_CLASS);
+            comparator = new MethodComparator(CLASS_CHILD);
             return comparator;
         }
 
         public void theFirstOneShouldBeLesser() {
-            specify(comparator.compare(TestData.METHOD_ONE, TestData.METHOD_TWO) < 0);
+            specify(comparator.compare(METHOD_ONE, METHOD_TWO) < 0);
         }
 
         public void theSecondOneShouldBeGreater() {
-            specify(comparator.compare(TestData.METHOD_TWO, TestData.METHOD_ONE) > 0);
+            specify(comparator.compare(METHOD_TWO, METHOD_ONE) > 0);
         }
     }
 
@@ -34,12 +35,12 @@ public class MethodComparatorSpec extends Specification<MethodComparator> {
         private MethodComparator comparator;
 
         public MethodComparator create() {
-            comparator = new MethodComparator(TestData.METHOD_CLASS);
+            comparator = new MethodComparator(CLASS_CHILD);
             return comparator;
         }
 
         public void itShouldBeEqualToItself() {
-            specify(comparator.compare(TestData.METHOD_ONE, TestData.METHOD_ONE) == 0);
+            specify(comparator.compare(METHOD_ONE, METHOD_ONE) == 0);
         }
     }
 }
