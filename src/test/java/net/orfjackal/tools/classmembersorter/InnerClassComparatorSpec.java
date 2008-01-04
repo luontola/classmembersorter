@@ -16,7 +16,7 @@ public class InnerClassComparatorSpec extends Specification<InnerClassComparator
         private InnerClassComparator comparator;
 
         public InnerClassComparator create() {
-            comparator = new InnerClassComparator();
+            comparator = new InnerClassComparator(TestData.class);
             return comparator;
         }
 
@@ -34,7 +34,7 @@ public class InnerClassComparatorSpec extends Specification<InnerClassComparator
         private InnerClassComparator comparator;
 
         public InnerClassComparator create() {
-            comparator = new InnerClassComparator();
+            comparator = new InnerClassComparator(TestData.class);
             return comparator;
         }
 
