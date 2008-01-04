@@ -11,14 +11,14 @@ import org.junit.runner.RunWith;
  * @since 4.1.2008
  */
 @RunWith(JDaveRunner.class)
-public class MethodComparatorSpec extends Specification<MethodComparator> {
+public class MethodLineNumberComparatorSpec extends Specification<MethodLineNumberComparator> {
 
     public class WhenTwoMethodsAreCompared {
 
-        private MethodComparator comparator;
+        private MethodLineNumberComparator comparator;
 
-        public MethodComparator create() {
-            comparator = new MethodComparator();
+        public MethodLineNumberComparator create() {
+            comparator = new MethodLineNumberComparator();
             return comparator;
         }
 
@@ -33,10 +33,10 @@ public class MethodComparatorSpec extends Specification<MethodComparator> {
 
     public class WhenAMethodIsComparedWithItself {
 
-        private MethodComparator comparator;
+        private MethodLineNumberComparator comparator;
 
-        public MethodComparator create() {
-            comparator = new MethodComparator();
+        public MethodLineNumberComparator create() {
+            comparator = new MethodLineNumberComparator();
             return comparator;
         }
 

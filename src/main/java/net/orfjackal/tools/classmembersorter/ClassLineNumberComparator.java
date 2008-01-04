@@ -11,11 +11,11 @@ import java.util.Comparator;
  * @author Esko Luontola
  * @since 4.1.2008
  */
-public class InnerClassComparator implements Comparator<java.lang.Class<?>> {
+public class ClassLineNumberComparator implements Comparator<java.lang.Class<?>> {
 
     private Repository repository;
 
-    public InnerClassComparator() {
+    public ClassLineNumberComparator() {
         repository = new ClassLoaderRepository(getClass().getClassLoader());
     }
 

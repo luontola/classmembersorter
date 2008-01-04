@@ -12,11 +12,11 @@ import java.util.Comparator;
  * @author Esko Luontola
  * @since 4.1.2008
  */
-public class MethodComparator implements Comparator<java.lang.reflect.Method> {
+public class MethodLineNumberComparator implements Comparator<java.lang.reflect.Method> {
 
     private Repository repository;
 
-    public MethodComparator() {
+    public MethodLineNumberComparator() {
         repository = new ClassLoaderRepository(getClass().getClassLoader());
     }
 

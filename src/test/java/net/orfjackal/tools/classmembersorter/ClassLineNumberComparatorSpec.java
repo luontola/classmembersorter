@@ -9,14 +9,14 @@ import org.junit.runner.RunWith;
  * @since 4.1.2008
  */
 @RunWith(JDaveRunner.class)
-public class InnerClassComparatorSpec extends Specification<InnerClassComparator> {
+public class ClassLineNumberComparatorSpec extends Specification<ClassLineNumberComparator> {
 
     public class WhenTwoInnerClassesAreCompared {
 
-        private InnerClassComparator comparator;
+        private ClassLineNumberComparator comparator;
 
-        public InnerClassComparator create() {
-            comparator = new InnerClassComparator();
+        public ClassLineNumberComparator create() {
+            comparator = new ClassLineNumberComparator();
             return comparator;
         }
 
@@ -31,10 +31,10 @@ public class InnerClassComparatorSpec extends Specification<InnerClassComparator
 
     public class WhenAnInnerClassIsComparedWithItself {
 
-        private InnerClassComparator comparator;
+        private ClassLineNumberComparator comparator;
 
-        public InnerClassComparator create() {
-            comparator = new InnerClassComparator();
+        public ClassLineNumberComparator create() {
+            comparator = new ClassLineNumberComparator();
             return comparator;
         }
 
