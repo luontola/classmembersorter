@@ -30,9 +30,9 @@ public class ClassMemberSorterSpec extends Specification<ClassMemberSorter> {
             specify(methods, should.containInOrder(METHOD_ONE, METHOD_TWO));
         }
 
-//        public void shouldGetMethodsInOrderWithInheritedMethodsLast() {
-//            Method[] methods = ClassMemberSorter.getMethods(CLASS_CHILD);
-//            specify(methods, should.containInPartialOrder(METHOD_ONE, METHOD_TWO, METHOD_PARENT, METHOD_SUPER_PARENT));
-//        }
+        public void shouldGetMethodsInOrderWithInheritedMethodsLast() {
+            Method[] methods = ClassMemberSorter.getMethods(CLASS_CHILD);
+            specify(methods, should.containInPartialOrder(METHOD_ONE, METHOD_TWO, METHOD_PARENT, METHOD_SUPER_PARENT));
+        }
     }
 }
