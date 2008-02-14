@@ -31,6 +31,8 @@ import java.util.Map;
  */
 public class AsmLineNumberStrategy implements LineNumberStrategy {
 
+    private final Map<Class<?>, LineNumberClassVisitor> cache = new HashMap<Class<?>, LineNumberClassVisitor>();
+
     public int firstLineNumber(Class<?> clazz, int defaultValue) {
         LineNumberClassVisitor visitor = processClass(clazz);
         int line = visitor.getSmallestLineNumber();
@@ -44,10 +46,15 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
     }
 
     private LineNumberClassVisitor processClass(Class<?> clazz) {
+        LineNumberClassVisitor visitor = cache.get(clazz);
+        if (visitor != null) {
+            return visitor;
+        }
         try {
             ClassReader reader = new ClassReader(clazz.getName());
-            LineNumberClassVisitor visitor = new LineNumberClassVisitor();
+            visitor = new LineNumberClassVisitor();
             reader.accept(visitor, false);
+            cache.put(clazz, visitor);
             return visitor;
 
         } catch (IOException e) {
@@ -55,7 +62,7 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
         }
     }
 
-    private class LineNumberClassVisitor extends NullClassVisitor {
+    private static class LineNumberClassVisitor extends NullClassVisitor {
 
         private final LineNumberCodeVisitor codeVisitor = new LineNumberCodeVisitor(this);
         private final Map<String, Integer> methodLines = new HashMap<String, Integer>();
@@ -67,10 +74,6 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
             return codeVisitor;
         }
 
-        public Integer getLineNumber(Method method) {
-            return methodLines.get(method.getName());
-        }
-
         public void visitLineNumber(int line) {
             if (nextMethod != null) {
                 minLine = Math.min(minLine, line);
@@ -79,12 +82,16 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
             }
         }
 
+        public Integer getLineNumber(Method method) {
+            return methodLines.get(method.getName());
+        }
+
         public int getSmallestLineNumber() {
             return minLine;
         }
     }
 
-    private class LineNumberCodeVisitor extends NullCodeVisitor {
+    private static class LineNumberCodeVisitor extends NullCodeVisitor {
 
         private final LineNumberClassVisitor classVisitor;
 
@@ -97,7 +104,7 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
         }
     }
 
-    private static abstract class NullClassVisitor implements ClassVisitor {
+    private static class NullClassVisitor implements ClassVisitor {
 
         public void visit(int version, int access, String name, String superName, String[] interfaces, String sourceFile) {
         }
@@ -119,7 +126,7 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
         }
     }
 
-    private static abstract class NullCodeVisitor implements CodeVisitor {
+    private static class NullCodeVisitor implements CodeVisitor {
 
         public void visitInsn(int opcode) {
         }
