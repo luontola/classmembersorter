@@ -49,8 +49,8 @@
     <dependencies>
 
         <!-- BCEL 5.2 is newer, but Maven repository does not contain its sources,
-            so development against it is not nice. Also 5.2 has a dependency to
-            jakarta-regexp:jakarta-regexp:1.4 but by using 5.1 we can avoid it. -->
+             so development against it is not nice. Also 5.2 has a dependency to
+             jakarta-regexp:jakarta-regexp:1.4 but by using 5.1 we can avoid it. -->
         <dependency>
             <groupId>bcel</groupId>
             <artifactId>bcel</artifactId>
@@ -64,6 +64,9 @@
         </dependency>
         -->
 
+        <!-- ASM 1.5.3 is the same as is used by CGLIB. If you want to use the ASM
+             which is distributed with cglib-nodep, just change the imports in the
+             AsmLineNumberStrategy class. -->
         <dependency>
             <groupId>asm</groupId>
             <artifactId>asm</artifactId>

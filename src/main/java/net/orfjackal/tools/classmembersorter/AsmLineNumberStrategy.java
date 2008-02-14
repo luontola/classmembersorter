@@ -81,6 +81,7 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
         }
 
         public Integer firstMethodLineNumber(Method method) {
+            // TODO: does not handle overloaded methods properly - ignores method parameters
             return methodLines.get(method.getName());
         }
 
