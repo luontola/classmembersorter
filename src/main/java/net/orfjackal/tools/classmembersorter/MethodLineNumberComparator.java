@@ -28,7 +28,14 @@ import java.util.Comparator;
  */
 public class MethodLineNumberComparator implements Comparator<Method> {
 
-    private final LineNumberStrategy strategy = LineNumberStrategy.CURRENT_STRATEGY;
+    private final LineNumberStrategy strategy;
+
+    public MethodLineNumberComparator(LineNumberStrategy strategy) {
+        if (strategy == null) {
+            throw new NullPointerException("strategy is null");
+        }
+        this.strategy = strategy;
+    }
 
     public int compare(Method m1, Method m2) {
         if (sameClass(m1, m2)) {
@@ -48,15 +55,15 @@ public class MethodLineNumberComparator implements Comparator<Method> {
         return strategy.firstLineNumber(method, 0);
     }
 
-    private static boolean sameClass(Method o1, Method o2) {
-        return o1.getDeclaringClass().equals(o2.getDeclaringClass());
+    private static boolean sameClass(Method m1, Method m2) {
+        return m1.getDeclaringClass().equals(m2.getDeclaringClass());
     }
 
     private static boolean parentClass(Method parent, Method child) {
         return parent.getDeclaringClass().isAssignableFrom(child.getDeclaringClass());
     }
 
-    private static int alphabeticalOrder(Method o1, Method o2) {
-        return o1.getDeclaringClass().getName().compareTo(o2.getDeclaringClass().getName());
+    private static int alphabeticalOrder(Method m1, Method m2) {
+        return m1.getDeclaringClass().getName().compareTo(m2.getDeclaringClass().getName());
     }
 }

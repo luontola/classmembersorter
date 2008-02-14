@@ -31,7 +31,16 @@ import java.util.Arrays;
  */
 public final class ClassMemberSorter {
 
+    private static LineNumberStrategy strategy = new AsmLineNumberStrategy();
+
     private ClassMemberSorter() {
+    }
+
+    public static void setStrategy(LineNumberStrategy strategy) {
+        if (strategy == null) {
+            throw new NullPointerException("strategy is null");
+        }
+        ClassMemberSorter.strategy = strategy;
     }
 
     /**
@@ -39,7 +48,7 @@ public final class ClassMemberSorter {
      */
     public static Class<?>[] getDeclaredClasses(Class<?> declaringClass) {
         Class<?>[] classes = declaringClass.getDeclaredClasses();
-        Arrays.sort(classes, new ClassLineNumberComparator());
+        Arrays.sort(classes, new ClassLineNumberComparator(strategy));
         return classes;
     }
 
@@ -48,7 +57,7 @@ public final class ClassMemberSorter {
      */
     public static Method[] getDeclaredMethods(Class<?> declaringClass) {
         Method[] methods = declaringClass.getDeclaredMethods();
-        Arrays.sort(methods, new MethodLineNumberComparator());
+        Arrays.sort(methods, new MethodLineNumberComparator(strategy));
         return methods;
     }
 
@@ -57,7 +66,7 @@ public final class ClassMemberSorter {
      */
     public static Method[] getMethods(Class<?> clazz) {
         Method[] methods = clazz.getMethods();
-        Arrays.sort(methods, new MethodLineNumberComparator());
+        Arrays.sort(methods, new MethodLineNumberComparator(strategy));
         return methods;
     }
 }

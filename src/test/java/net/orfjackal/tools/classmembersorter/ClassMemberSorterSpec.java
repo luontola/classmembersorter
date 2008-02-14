@@ -34,6 +34,7 @@ public class ClassMemberSorterSpec extends Specification<ClassMemberSorter> {
     public class AClassMemberSorter {
 
         public ClassMemberSorter create() {
+            ClassMemberSorter.setStrategy(TestConfig.getStrategy());
             return null;
         }
 

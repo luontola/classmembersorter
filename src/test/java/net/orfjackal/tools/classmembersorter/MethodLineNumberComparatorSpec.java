@@ -37,7 +37,7 @@ public class MethodLineNumberComparatorSpec extends Specification<Comparator<Met
     public class WhenTwoMethodsAreCompared {
 
         public Comparator<Method> create() {
-            comparator = new MethodLineNumberComparator();
+            comparator = new MethodLineNumberComparator(TestConfig.getStrategy());
             return comparator;
         }
 
@@ -53,7 +53,7 @@ public class MethodLineNumberComparatorSpec extends Specification<Comparator<Met
     public class WhenAMethodIsComparedWithItself {
 
         public Comparator<Method> create() {
-            comparator = new MethodLineNumberComparator();
+            comparator = new MethodLineNumberComparator(TestConfig.getStrategy());
             return comparator;
         }
 
@@ -65,7 +65,7 @@ public class MethodLineNumberComparatorSpec extends Specification<Comparator<Met
     public class WhenTheOtherMethodIsInAParentClass {
 
         public Comparator<Method> create() {
-            comparator = new MethodLineNumberComparator();
+            comparator = new MethodLineNumberComparator(TestConfig.getStrategy());
             return comparator;
         }
 
@@ -83,7 +83,7 @@ public class MethodLineNumberComparatorSpec extends Specification<Comparator<Met
     public class WhenMethodsAreInUnrelatedClasses {
 
         public Comparator<Method> create() {
-            comparator = new MethodLineNumberComparator();
+            comparator = new MethodLineNumberComparator(TestConfig.getStrategy());
             return comparator;
         }
 

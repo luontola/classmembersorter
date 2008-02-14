@@ -37,7 +37,7 @@ public class ClassLineNumberComparatorSpec extends Specification<Comparator<Clas
     public class WhenTwoInnerClassesAreCompared {
 
         public Comparator<Class<?>> create() {
-            comparator = new ClassLineNumberComparator();
+            comparator = new ClassLineNumberComparator(TestConfig.getStrategy());
             return comparator;
         }
 
@@ -53,7 +53,7 @@ public class ClassLineNumberComparatorSpec extends Specification<Comparator<Clas
     public class WhenAnInnerClassIsComparedWithItself {
 
         public Comparator<Class<?>> create() {
-            comparator = new ClassLineNumberComparator();
+            comparator = new ClassLineNumberComparator(TestConfig.getStrategy());
             return comparator;
         }
 
