@@ -34,18 +34,16 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
     private final Map<Class<?>, LineNumberClassVisitor> cache = new HashMap<Class<?>, LineNumberClassVisitor>();
 
     public int firstLineNumber(Class<?> clazz, int defaultValue) {
-        LineNumberClassVisitor visitor = processClass(clazz);
-        int line = visitor.getSmallestLineNumber();
+        int line = analyze(clazz).getSmallestLineNumber();
         return line < Integer.MAX_VALUE ? line : defaultValue;
     }
 
     public int firstLineNumber(Method method, int defaultValue) {
-        LineNumberClassVisitor visitor = processClass(method.getDeclaringClass());
-        Integer line = visitor.getLineNumber(method);
+        Integer line = analyze(method.getDeclaringClass()).getLineNumber(method);
         return line != null ? line : defaultValue;
     }
 
-    private LineNumberClassVisitor processClass(Class<?> clazz) {
+    private LineNumberClassVisitor analyze(Class<?> clazz) {
         LineNumberClassVisitor visitor = cache.get(clazz);
         if (visitor != null) {
             return visitor;
@@ -58,7 +56,7 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
             return visitor;
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error reading class: " + clazz, e);
         }
     }
 
