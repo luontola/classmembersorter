@@ -18,7 +18,7 @@
 package net.orfjackal.tools.classmembersorter;
 
 
-import org.objectweb.asm.*;
+import net.sf.cglib.asm.*;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -34,12 +34,12 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
     private final Map<Class<?>, LineNumberClassVisitor> cache = new HashMap<Class<?>, LineNumberClassVisitor>();
 
     public int firstLineNumber(Class<?> clazz, int defaultValue) {
-        int line = analyze(clazz).getSmallestLineNumber();
+        int line = analyze(clazz).firstClassLineNumber();
         return line < Integer.MAX_VALUE ? line : defaultValue;
     }
 
     public int firstLineNumber(Method method, int defaultValue) {
-        Integer line = analyze(method.getDeclaringClass()).getLineNumber(method);
+        Integer line = analyze(method.getDeclaringClass()).firstMethodLineNumber(method);
         return line != null ? line : defaultValue;
     }
 
@@ -80,11 +80,11 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
             }
         }
 
-        public Integer getLineNumber(Method method) {
+        public Integer firstMethodLineNumber(Method method) {
             return methodLines.get(method.getName());
         }
 
-        public int getSmallestLineNumber() {
+        public int firstClassLineNumber() {
             return minLine;
         }
     }
