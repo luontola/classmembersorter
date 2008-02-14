@@ -3,7 +3,7 @@
 
     <groupId>net.orfjackal.tools</groupId>
     <artifactId>classmembersorter</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>Class Member Sorter</name>
@@ -26,8 +26,8 @@
     </developers>
 
     <scm>
-        <connection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/trunk</connection>
-        <developerConnection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/trunk</developerConnection>
+        <connection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/tags/classmembersorter-1.1.0</connection>
+        <developerConnection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/tags/classmembersorter-1.1.0</developerConnection>
     </scm>
 
     <repositories>
@@ -49,8 +49,8 @@
     <dependencies>
 
         <!-- BCEL 5.2 is newer, but Maven repository does not contain its sources,
-            so development against it is not nice. Also 5.2 has a dependency to
-            jakarta-regexp:jakarta-regexp:1.4 but by using 5.1 we can avoid it. -->
+             so development against it is not nice. Also 5.2 has a dependency to
+             jakarta-regexp:jakarta-regexp:1.4 but by using 5.1 we can avoid it. -->
         <dependency>
             <groupId>bcel</groupId>
             <artifactId>bcel</artifactId>
@@ -63,6 +63,15 @@
             <version>5.2</version>
         </dependency>
         -->
+
+        <!-- ASM 1.5.3 is the same as is used by CGLIB. If you want to use the ASM
+             which is distributed with cglib-nodep, just change the imports in the
+             AsmLineNumberStrategy class. -->
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>1.5.3</version>
+        </dependency>
 
         <dependency>
             <groupId>org.jdave</groupId>

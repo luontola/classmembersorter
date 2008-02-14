@@ -17,21 +17,26 @@
 
 package net.orfjackal.tools.classmembersorter;
 
-import java.util.Comparator;
+import net.orfjackal.tools.Benchmark;
 
 /**
- * Sorts (inner) classes according to the order in which they have been declared in the source code.
- *
  * @author Esko Luontola
- * @since 4.1.2008
+ * @since 14.2.2008
  */
-public class ClassLineNumberComparator implements Comparator<Class<?>> {
-
-    private final LineNumberStrategy strategy = LineNumberStrategy.CURRENT_STRATEGY;
-
-    public int compare(Class<?> c1, Class<?> c2) {
-        int line1 = strategy.firstLineNumber(c1, 0);
-        int line2 = strategy.firstLineNumber(c2, 0);
-        return line1 - line2;
+public class BenchmarkClassParsingSpeed {
+    public static void main(String[] args) {
+        final Class<?> testClass = ClassMemberSorterSpec.AClassMemberSorter.class;
+        Benchmark benchmark = new Benchmark(5, 1000);
+        benchmark.runBenchmark("Parse class with ASM", new Runnable() {
+            public void run() {
+                new AsmLineNumberStrategy().firstLineNumber(testClass, 0);
+            }
+        });
+        benchmark.runBenchmark("Parse class with BCEL", new Runnable() {
+            public void run() {
+                new BcelLineNumberStrategy().firstLineNumber(testClass, 0);
+            }
+        });
+        benchmark.printResults();
     }
 }

@@ -27,7 +27,7 @@ import org.apache.bcel.util.Repository;
  * @author Esko Luontola
  * @since 4.1.2008
  */
-public final class BcelLineNumberStrategy implements LineNumberStrategy {
+public class BcelLineNumberStrategy implements LineNumberStrategy {
 
     private final Repository repository = new ClassLoaderRepository(getClass().getClassLoader());
 
