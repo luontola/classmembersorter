@@ -65,6 +65,12 @@
         -->
 
         <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.jdave</groupId>
             <artifactId>jdave-junit4</artifactId>
             <version>1.0-rc1</version>

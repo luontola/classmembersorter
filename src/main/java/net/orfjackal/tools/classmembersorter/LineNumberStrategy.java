@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
  */
 public interface LineNumberStrategy {
 
-    static LineNumberStrategy CURRENT_STRATEGY = new BcelLineNumberStrategy();
+    static LineNumberStrategy CURRENT_STRATEGY = new AsmLineNumberStrategy();
 
     int firstLineNumber(Class<?> clazz, int defaultValue);
 
