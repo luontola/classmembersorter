@@ -3,7 +3,7 @@
 
     <groupId>net.orfjackal.tools</groupId>
     <artifactId>classmembersorter</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>Class Member Sorter</name>
@@ -26,8 +26,8 @@
     </developers>
 
     <scm>
-        <connection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/trunk</connection>
-        <developerConnection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/trunk</developerConnection>
+        <connection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/tags/classmembersorter-1.1.0</connection>
+        <developerConnection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/tags/classmembersorter-1.1.0</developerConnection>
     </scm>
 
     <repositories>
