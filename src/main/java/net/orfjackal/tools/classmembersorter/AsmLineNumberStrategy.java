@@ -18,7 +18,7 @@
 package net.orfjackal.tools.classmembersorter;
 
 
-import net.sf.cglib.asm.*;
+import org.objectweb.asm.*;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
