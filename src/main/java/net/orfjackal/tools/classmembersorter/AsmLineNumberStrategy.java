@@ -21,6 +21,7 @@ package net.orfjackal.tools.classmembersorter;
 import org.objectweb.asm.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
             return visitor;
         }
         try {
-            ClassReader reader = new ClassReader(clazz.getName());
+            ClassReader reader = new ClassReader(toStream(clazz));
             visitor = new LineNumberClassVisitor();
             reader.accept(visitor, false);
             cache.put(clazz, visitor);
@@ -58,6 +59,17 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
         } catch (IOException e) {
             throw new RuntimeException("Error reading class: " + clazz, e);
         }
+    }
+
+    private static InputStream toStream(Class<?> clazz) {
+        // WORKAROUND: org.objectweb.asm.ClassReader(java.lang.String) has a bug which causes it to
+        // not find the class file in some situations
+        String name = clazz.getName();
+        int i = name.lastIndexOf('.');
+        if (i > 0) {
+            name = name.substring(i + 1);
+        }
+        return clazz.getResourceAsStream(name + ".class");
     }
 
     private static class LineNumberClassVisitor extends NullClassVisitor {
