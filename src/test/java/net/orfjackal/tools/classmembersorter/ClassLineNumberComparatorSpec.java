@@ -23,18 +23,20 @@ import static net.orfjackal.tools.classmembersorter.TestData.CLASS_ONE;
 import static net.orfjackal.tools.classmembersorter.TestData.CLASS_TWO;
 import org.junit.runner.RunWith;
 
+import java.util.Comparator;
+
 /**
  * @author Esko Luontola
  * @since 4.1.2008
  */
 @RunWith(JDaveRunner.class)
-public class ClassLineNumberComparatorSpec extends Specification<ClassLineNumberComparator> {
+public class ClassLineNumberComparatorSpec extends Specification<Comparator<Class<?>>> {
 
-    private ClassLineNumberComparator comparator;
+    private Comparator<Class<?>> comparator;
 
     public class WhenTwoInnerClassesAreCompared {
 
-        public ClassLineNumberComparator create() {
+        public Comparator<Class<?>> create() {
             comparator = new ClassLineNumberComparator();
             return comparator;
         }
@@ -50,7 +52,7 @@ public class ClassLineNumberComparatorSpec extends Specification<ClassLineNumber
 
     public class WhenAnInnerClassIsComparedWithItself {
 
-        public ClassLineNumberComparator create() {
+        public Comparator<Class<?>> create() {
             comparator = new ClassLineNumberComparator();
             return comparator;
         }

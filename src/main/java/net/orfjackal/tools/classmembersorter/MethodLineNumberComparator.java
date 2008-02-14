@@ -17,10 +17,6 @@
 
 package net.orfjackal.tools.classmembersorter;
 
-import org.apache.bcel.classfile.JavaClass;
-import org.apache.bcel.util.ClassLoaderRepository;
-import org.apache.bcel.util.Repository;
-
 import java.lang.reflect.Method;
 import java.util.Comparator;
 
@@ -32,11 +28,7 @@ import java.util.Comparator;
  */
 public class MethodLineNumberComparator implements Comparator<Method> {
 
-    private Repository repository;
-
-    public MethodLineNumberComparator() {
-        repository = new ClassLoaderRepository(getClass().getClassLoader());
-    }
+    private final LineNumberStrategy strategy = new BcelLineNumberStrategy();
 
     public int compare(Method o1, Method o2) {
         if (sameClass(o1, o2)) {
@@ -53,16 +45,7 @@ public class MethodLineNumberComparator implements Comparator<Method> {
     }
 
     private int firstLineNumber(Method method) {
-        return BcelUtils.firstLineNumber(toBcel(method), 0);
-    }
-
-    private org.apache.bcel.classfile.Method toBcel(Method method) {
-        try {
-            JavaClass javaClass = repository.loadClass(method.getDeclaringClass());
-            return javaClass.getMethod(method);
-        } catch (ClassNotFoundException e) {
-            throw new IllegalArgumentException("Unable to load class of method: " + method, e);
-        }
+        return strategy.firstLineNumber(method, 0);
     }
 
     private static boolean sameClass(Method o1, Method o2) {

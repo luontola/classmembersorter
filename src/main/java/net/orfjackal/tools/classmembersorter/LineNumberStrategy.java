@@ -17,21 +17,15 @@
 
 package net.orfjackal.tools.classmembersorter;
 
-import java.util.Comparator;
+import java.lang.reflect.Method;
 
 /**
- * Sorts (inner) classes according to the order in which they have been declared in the source code.
- *
  * @author Esko Luontola
- * @since 4.1.2008
+ * @since 14.2.2008
  */
-public class ClassLineNumberComparator implements Comparator<Class<?>> {
+public interface LineNumberStrategy {
 
-    private final LineNumberStrategy strategy = new BcelLineNumberStrategy();
+    int firstLineNumber(Class<?> clazz, int defaultValue);
 
-    public int compare(Class<?> c1, Class<?> c2) {
-        int line1 = strategy.firstLineNumber(c1, 0);
-        int line2 = strategy.firstLineNumber(c2, 0);
-        return line1 - line2;
-    }
+    int firstLineNumber(Method method, int defaultValue);
 }

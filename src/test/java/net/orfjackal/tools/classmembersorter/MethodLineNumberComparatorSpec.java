@@ -22,18 +22,21 @@ import jdave.junit4.JDaveRunner;
 import static net.orfjackal.tools.classmembersorter.TestData.*;
 import org.junit.runner.RunWith;
 
+import java.lang.reflect.Method;
+import java.util.Comparator;
+
 /**
  * @author Esko Luontola
  * @since 4.1.2008
  */
 @RunWith(JDaveRunner.class)
-public class MethodLineNumberComparatorSpec extends Specification<MethodLineNumberComparator> {
+public class MethodLineNumberComparatorSpec extends Specification<Comparator<Method>> {
 
     private MethodLineNumberComparator comparator;
 
     public class WhenTwoMethodsAreCompared {
 
-        public MethodLineNumberComparator create() {
+        public Comparator<Method> create() {
             comparator = new MethodLineNumberComparator();
             return comparator;
         }
@@ -49,7 +52,7 @@ public class MethodLineNumberComparatorSpec extends Specification<MethodLineNumb
 
     public class WhenAMethodIsComparedWithItself {
 
-        public MethodLineNumberComparator create() {
+        public Comparator<Method> create() {
             comparator = new MethodLineNumberComparator();
             return comparator;
         }
@@ -61,7 +64,7 @@ public class MethodLineNumberComparatorSpec extends Specification<MethodLineNumb
 
     public class WhenTheOtherMethodIsInAParentClass {
 
-        public MethodLineNumberComparator create() {
+        public Comparator<Method> create() {
             comparator = new MethodLineNumberComparator();
             return comparator;
         }
@@ -79,7 +82,7 @@ public class MethodLineNumberComparatorSpec extends Specification<MethodLineNumb
 
     public class WhenMethodsAreInUnrelatedClasses {
 
-        public MethodLineNumberComparator create() {
+        public Comparator<Method> create() {
             comparator = new MethodLineNumberComparator();
             return comparator;
         }

@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+import net.sf.cglib.asm.*;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.LineNumberTable;
@@ -47,6 +48,92 @@ public class ReadLineNumbersFromClassFile {
             System.out.println("LineNumberTable = " + Arrays.toString(table.getLineNumberTable()));
             System.out.println("Code = " + method.getCode());
         }
+
+        System.out.println("----------------");
+        ClassReader reader = new ClassReader(ReadLineNumbersFromClassFile.class.getName());
+        reader.accept(new ClassVisitor() {
+            public void visit(int i, int i1, String s, String s1, String[] strings, String s2) {
+            }
+
+            public void visitInnerClass(String s, String s1, String s2, int i) {
+            }
+
+            public void visitField(int i, String s, String s1, Object o, Attribute attribute) {
+            }
+
+            public CodeVisitor visitMethod(int i, String s, String s1, String[] strings, Attribute attribute) {
+                System.out.println("ReadLineNumbersFromClassFile.visitMethod");
+                System.out.println("i = " + i);
+                System.out.println("s = " + s);
+                System.out.println("s1 = " + s1);
+                System.out.println("strings = " + Arrays.toString(strings));
+                System.out.println("attribute = " + attribute);
+                return new CodeVisitor() {
+                    public void visitInsn(int i) {
+                    }
+
+                    public void visitIntInsn(int i, int i1) {
+                    }
+
+                    public void visitVarInsn(int i, int i1) {
+                    }
+
+                    public void visitTypeInsn(int i, String s) {
+                    }
+
+                    public void visitFieldInsn(int i, String s, String s1, String s2) {
+                    }
+
+                    public void visitMethodInsn(int i, String s, String s1, String s2) {
+                    }
+
+                    public void visitJumpInsn(int i, Label label) {
+                    }
+
+                    public void visitLabel(Label label) {
+                    }
+
+                    public void visitLdcInsn(Object o) {
+                    }
+
+                    public void visitIincInsn(int i, int i1) {
+                    }
+
+                    public void visitTableSwitchInsn(int i, int i1, Label label, Label[] labels) {
+                    }
+
+                    public void visitLookupSwitchInsn(Label label, int[] ints, Label[] labels) {
+                    }
+
+                    public void visitMultiANewArrayInsn(String s, int i) {
+                    }
+
+                    public void visitTryCatchBlock(Label label, Label label1, Label label2, String s) {
+                    }
+
+                    public void visitMaxs(int i, int i1) {
+                    }
+
+                    public void visitLocalVariable(String s, String s1, Label label, Label label1, int i) {
+                    }
+
+                    public void visitLineNumber(int i, Label label) {
+                        System.out.println("ReadLineNumbersFromClassFile.visitLineNumber");
+                        System.out.println("i = " + i);
+                        System.out.println("label = " + label);
+                    }
+
+                    public void visitAttribute(Attribute attribute) {
+                    }
+                };
+            }
+
+            public void visitAttribute(Attribute attribute) {
+            }
+
+            public void visitEnd() {
+            }
+        }, false);
     }
 
     public void empty() {
