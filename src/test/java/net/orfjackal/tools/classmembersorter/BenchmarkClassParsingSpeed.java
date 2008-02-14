@@ -24,17 +24,27 @@ import net.orfjackal.tools.Benchmark;
  * @since 14.2.2008
  */
 public class BenchmarkClassParsingSpeed {
+
     public static void main(String[] args) {
-        final Class<?> testClass = ClassMemberSorterSpec.AClassMemberSorter.class;
-        Benchmark benchmark = new Benchmark(5, 1000);
-        benchmark.runBenchmark("Parse class with ASM", new Runnable() {
+        Benchmark benchmark = new Benchmark(5, 500);
+        benchmark.runBenchmark("Parse java.lang.Object with ASM", new Runnable() {
             public void run() {
-                new AsmLineNumberStrategy().firstLineNumber(testClass, 0);
+                new AsmLineNumberStrategy().firstLineNumber(Object.class, 0);
             }
         });
-        benchmark.runBenchmark("Parse class with BCEL", new Runnable() {
+        benchmark.runBenchmark("Parse java.lang.Object with BCEL", new Runnable() {
             public void run() {
-                new BcelLineNumberStrategy().firstLineNumber(testClass, 0);
+                new BcelLineNumberStrategy().firstLineNumber(Object.class, 0);
+            }
+        });
+        benchmark.runBenchmark("Parse java.lang.String with ASM", new Runnable() {
+            public void run() {
+                new AsmLineNumberStrategy().firstLineNumber(String.class, 0);
+            }
+        });
+        benchmark.runBenchmark("Parse java.lang.String with BCEL", new Runnable() {
+            public void run() {
+                new BcelLineNumberStrategy().firstLineNumber(String.class, 0);
             }
         });
         benchmark.printResults();
