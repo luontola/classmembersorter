@@ -28,7 +28,7 @@ import java.util.Comparator;
  */
 public class MethodLineNumberComparator implements Comparator<Method> {
 
-    private final LineNumberStrategy strategy = new BcelLineNumberStrategy();
+    private final LineNumberStrategy strategy = LineNumberStrategy.CURRENT_STRATEGY;
 
     public int compare(Method o1, Method o2) {
         if (sameClass(o1, o2)) {

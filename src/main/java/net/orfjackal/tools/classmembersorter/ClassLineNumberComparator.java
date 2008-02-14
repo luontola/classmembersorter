@@ -27,7 +27,7 @@ import java.util.Comparator;
  */
 public class ClassLineNumberComparator implements Comparator<Class<?>> {
 
-    private final LineNumberStrategy strategy = new BcelLineNumberStrategy();
+    private final LineNumberStrategy strategy = LineNumberStrategy.CURRENT_STRATEGY;
 
     public int compare(Class<?> c1, Class<?> c2) {
         int line1 = strategy.firstLineNumber(c1, 0);
