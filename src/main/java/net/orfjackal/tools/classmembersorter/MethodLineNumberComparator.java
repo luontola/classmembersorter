@@ -30,17 +30,17 @@ public class MethodLineNumberComparator implements Comparator<Method> {
 
     private final LineNumberStrategy strategy = LineNumberStrategy.CURRENT_STRATEGY;
 
-    public int compare(Method o1, Method o2) {
-        if (sameClass(o1, o2)) {
-            int line1 = firstLineNumber(o1);
-            int line2 = firstLineNumber(o2);
+    public int compare(Method m1, Method m2) {
+        if (sameClass(m1, m2)) {
+            int line1 = firstLineNumber(m1);
+            int line2 = firstLineNumber(m2);
             return line1 - line2;
-        } else if (parentClass(o1, o2)) {
+        } else if (parentClass(m1, m2)) {
             return 1;
-        } else if (parentClass(o2, o1)) {
+        } else if (parentClass(m2, m1)) {
             return -1;
         } else {
-            return alphabeticalOrder(o1, o2);
+            return alphabeticalOrder(m1, m2);
         }
     }
 
