@@ -32,16 +32,24 @@ import java.util.Map;
 public class AsmLineNumberStrategy implements LineNumberStrategy {
 
     public int firstLineNumber(Class<?> clazz, int defaultValue) {
-        return 0;
+        LineNumberClassVisitor visitor = processClass(clazz);
+        int line = visitor.getSmallestLineNumber();
+        return line < Integer.MAX_VALUE ? line : defaultValue;
     }
 
     public int firstLineNumber(Method method, int defaultValue) {
+        LineNumberClassVisitor visitor = processClass(method.getDeclaringClass());
+        Integer line = visitor.getLineNumber(method);
+        return line != null ? line : defaultValue;
+    }
+
+    private LineNumberClassVisitor processClass(Class<?> clazz) {
         try {
-            ClassReader reader = new ClassReader(method.getDeclaringClass().getName());
+            ClassReader reader = new ClassReader(clazz.getName());
             LineNumberClassVisitor visitor = new LineNumberClassVisitor();
             reader.accept(visitor, false);
-            int line = visitor.getLineNumber(method);
-            return line >= 0 ? line : defaultValue;
+            return visitor;
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -51,6 +59,7 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
 
         private final LineNumberCodeVisitor codeVisitor = new LineNumberCodeVisitor(this);
         private final Map<String, Integer> methodLines = new HashMap<String, Integer>();
+        private int minLine = Integer.MAX_VALUE;
         private String nextMethod;
 
         public CodeVisitor visitMethod(int access, String name, String desc, String[] exceptions, Attribute attrs) {
@@ -58,15 +67,20 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
             return codeVisitor;
         }
 
-        public int getLineNumber(Method method) {
+        public Integer getLineNumber(Method method) {
             return methodLines.get(method.getName());
         }
 
         public void visitLineNumber(int line) {
             if (nextMethod != null) {
+                minLine = Math.min(minLine, line);
                 methodLines.put(nextMethod, line);
                 nextMethod = null;
             }
+        }
+
+        public int getSmallestLineNumber() {
+            return minLine;
         }
     }
 
