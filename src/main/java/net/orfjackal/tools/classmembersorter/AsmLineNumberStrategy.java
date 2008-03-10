@@ -50,9 +50,11 @@ public class AsmLineNumberStrategy implements LineNumberStrategy {
             return visitor;
         }
         try {
-            ClassReader reader = new ClassReader(toStream(clazz));
+            InputStream classAsStream = toStream(clazz);
+            ClassReader reader = new ClassReader(classAsStream);
             visitor = new LineNumberClassVisitor();
             reader.accept(visitor, false);
+            classAsStream.close();
             cache.put(clazz, visitor);
             return visitor;
 
