@@ -8,7 +8,7 @@
 
     <name>Class Member Sorter</name>
     <description>Sorts Method and Class objects according to the actual line numbers</description>
-    <url>http://www.orfjackal.net</url>
+    <url>http://github.com/orfjackal/classmembersorter</url>
     <inceptionYear>2008</inceptionYear>
 
     <licenses>
@@ -22,12 +22,13 @@
         <developer>
             <id>orfjackal</id>
             <name>Esko Luontola</name>
+            <url>http://www.orfjackal.net/</url>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/trunk</connection>
-        <developerConnection>scm:svn:svn://tux/orfjackal/tools/classmembersorter/trunk</developerConnection>
+        <connection>scm:git:git://github.com/orfjackal/classmembersorter.git</connection>
+        <url>http://github.com/orfjackal/classmembersorter</url>
     </scm>
 
     <repositories>
